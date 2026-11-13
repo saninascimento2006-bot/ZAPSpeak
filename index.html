@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAPSpeak - Mentoria de Inglês Infantil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fredoka:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-main: #514477;
+      --purple-dark: #35245F;
+      --green-soft: #8CCB91;
+      --green-light: #DDF4C5;
+      --yellow-pastel: #F8E39A;
+      --lilac-light: #D8C5E8;
+      --pink-light: #F6D8E2;
+      --warm-white: #FFFEFC;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--warm-white);
+      color: var(--purple-dark);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Fredoka', sans-serif;
+      color: var(--purple-main);
+      margin-top: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* === PATH FIX: Base path for images === */
+    /* Uncomment the appropriate base path depending on deployment:
+       1. Local server (same directory): ""
+       2. GitHub Pages / relative: "./"
+       3. Absolute path: "/ZAPSpeak/"
+    */
+    /* <base href="./"> */
+
+    /* === OU use caminhos absolutos relativos à pasta === */
+    .img-poster1 { content: url('poster1.jpeg'); }
+    .img-moeda { content: url('moeda.jpeg'); }
+    .img-logo { content: url('cartaoquadradro.jpeg'); }
+    .img-formas { content: url('formas.jpeg'); }
+    /* ====================================== */
+
+    /* === Fallback: se imagens não carregarem, mostra cores sólidas === */
+    .fallback-img {
+      background-size: cover;
+      background-position: center;
+      background-color: var(--lilac-light);
+    }
+
+    /* === Progresso de leitura (storytelling) === */
+    .reveal-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-main), var(--green-soft));
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* === Header === */
+    header {
+      background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+      color: var(--warm-white);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    /* Logo usando background-image */
+    .site-logo {
+      width: 40px;
+      height: 40px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-color: var(--warm-white);
+      border-radius: 0.5rem;
+    }
+
+    header p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* === Nav === */
+    nav {
+      background: var(--lilac-light);
+      padding: 0.8rem 2rem;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      color: var(--purple-dark);
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--purple-dark);
+    }
+
+    /* === Hero Section === */
+    .hero {
+      background: linear-gradient(135deg, var(--lilac-light), var(--warm-white));
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple-main), var(--green-soft));
+      border-radius: 2px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.2rem;
+      color: var(--purple-dark);
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--purple-main);
+      color: var(--warm-white);
+      padding: 0.8rem 1.8rem;
+      border-radius: 2rem;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0.5rem;
+      transition: background 0.3s;
+    }
+
+    .hero .btn:hover {
+      background: var(--purple-dark);
+    }
+
+    .btn-whats {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-whats:hover {
+      background: #128C7E;
+    }
+
+    /* === Seções com animação de revelação === */
+    section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    section.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--lilac-light);
+      padding-right: 1rem;
+    }
+
+    /* === Cartões === */
+    .card {
+      background: var(--warm-white);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                  box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Card com imagem de fundo */
+    .card-with-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    .card-with-image img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    .card-with-image .card-body {
+      position: relative;
+      z-index: 2;
+      padding: 1.5rem;
+    }
+
+    .card-with-image .card-body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(81,68,119,0.3), transparent);
+      border-radius: 1rem 1rem 0 0;
+      z-index: 1;
+    }
+
+    /* === Modalidades === */
+    .modalidades {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .modalidades {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .modalidades {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    /* === Tabela Comparativo === */
+    .comparativo {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+    }
+
+    .comparativo th, .comparativo td {
+      border: 1px solid var(--lilac-light);
+      padding: 0.8rem;
+      text-align: left;
+    }
+
+    .comparativo th {
+      background: var(--purple-main);
+      color: var(--warm-white);
+    }
+
+    .comparativo td {
+      background: var(--warm-white);
+    }
+
+    /* === Speakts com efeito moeda 3D === */
+    .speakts {
+      background: var(--green-soft);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .speakts::before {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 60px;
+      height: 60px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-color: var(--warm-white);
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: spin 20s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* === Rodapé === */
+    footer {
+      background: var(--purple-dark);
+      color: var(--warm-white);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    /* === Responsividade === */
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 2rem; }
+      nav ul { gap: 1rem; }
+    }
+
+    /* === Tipografia === */
+    .typing-partial {
+      overflow: hidden;
+      border-right: 2px solid var(--purple-main);
+      white-space: nowrap;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de progresso para storytelling -->
+  <div class="reveal-progress" id="progress-bar"></div>
+
+  <header>
+    <!-- Logo da marca usando imagem local -->
+    <div class="site-logo" style="background-image: url('cartaoquadradro.jpeg');" aria-hidden="true"></div>
+    <h1>ZAPSpeak</h1>
+    <p>Mentoria de inglês infantil pelo WhatsApp</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#como">Como funciona</a></li>
+      <li><a href="#modalidades">Modalidades</a></li>
+      <li><a href="#contato">Fale conosco</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h2>Aprender inglês em família</h2>
+    <p>Uma experiência leve, lúdica e flexível para criança e mãe participarem juntas, no próprio ritmo e pelo WhatsApp.</p>
+
+    <div>
+      <a href="https://wa.me/5511999999999" class="btn btn-whats">Conversar no WhatsApp</a>
+      <a href="#sobre" class="btn">Saiba mais</a>
+    </div>
+  </section>
+
+  <main>
+
+    <section id="sobre">
+      <h2 class="section-title">Sobre a ZAPSpeak</h2>
+
+      <!-- Card com imagem da poster1 -->
+      <div class="card card-with-image">
+        <div class="card-body">
+          <img src="poster1.jpeg" alt="Criança e mãe estudando inglês juntos - capa da apostila">
+          <h3>Aprender juntos é mais divertido</h3>
+          <p>A ZAPSpeak foi criada para que mães e filhos aprendam inglês juntos, no ritmo da família. Atividades acontecem pelo WhatsApp, com vocabulário do dia a dia, músicas, jogos e desafios criativos.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="poster2.jpeg" alt="Material didático colorido">
+        <h3>Sem horários fixos</h3>
+        <p>Estude quando e onde melhor para a sua família. Não há compromissos rígidos. A proposta é leve, divertida e sem pressão.</p>
+      </div>
+    </section>
+
+    <section id="como">
+      <h2 class="section-title">Como funciona</h2>
+
+      <ol style="max-width: 800px; margin: 0 auto;">
+        <li>A pessoa responsável chama a ZAPSpeak pelo WhatsApp e informa a idade da criança.</li>
+        <li>Escolhe uma das modalidades: <strong>Grupo Misto</strong> ou <strong>VIP Exclusivo</strong>.</li>
+        <li>Entra no grupo correspondente e recebe o material de boas-vindas.</li>
+        <li>A criança e a mãe começam a participar das atividades pelo WhatsApp.</li>
+      </ol>
+
+      <div class="speakts">
+        <h3>Sistema Speakts (Grupo Misto)</h3>
+        <p>Os pontos Speakts recompensam a participação nas atividades. Meta indicada para o módulo: 1.110 SPKTS. O primeiro lugar do ranking recebe certificado físico com tubo e presente gratuitamente em casa.</p>
+        <table style="width: 100%; margin-top: 1rem; font-size: 0.9rem;">
+          <tr><td>Enviar áudio de feedback</td><td>10 SPKTS</td></tr>
+          <tr><td>Enviar foto do caderno</td><td>15 SPKTS</td></tr>
+          <tr><td>Concluir desafio</td><td>15 SPKTS</td></tr>
+          <tr><td>Bônus de pontualidade</td><td>5 SPKTS</td></tr>
+          <tr><td>Total semanal</td><td>45 SPKTS</td></tr>
+        </table>
+        <!-- Moeda girando já está acima via ::before animation -->
+      </div>
+    </section>
+
+    <section id="modalidades">
+      <h2 class="section-title">Modalidades</h2>
+
+      <div class="modalidades">
+
+        <div class="card" style="border: 2px solid var(--purple-main);">
+          <div class="card-body">
+            <h3>Grupo Misto — R$ 50/mês</h3>
+            <ul>
+              <li>Participação em grupo de WhatsApp (até 10 crianças)</li>
+              <li>Sistema Speakts e ranking</li>
+              <li>Atividades de vocabulário, escuta e fala</li>
+              <li>Desafios para fazer em casa com a mãe</li>
+              <li>Certificado digital em PDF (gratuito)</li>
+              <li>Certificado físico personalizado: R$ 50 + frete</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="border: 2px solid var(--green-soft);">
+          <div class="card-body">
+            <h3>VIP Exclusivo — R$ 200/mês</h3>
+            <ul>
+              <li>Atenção exclusiva (5 vagas apenas)</li>
+              <li>Privacidade total</li>
+              <li>Mesma proposta de aprendizagem</li>
+              <li>Certificado físico personalizado com tubo (incluído)</li>
+              <li>Frete grátis para todo o Brasil</li>
+              <li>Presente de conclusão de módulo</li>
+              <li>Irmão/irmã: +R$ 50 por criança</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <table class="comparativo">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Grupo Misto</th>
+            <th>VIP Exclusivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Mensalidade</td><td>R$ 50 por criança</td><td>R$ 200</td></tr>
+          <tr><td>Vagas/capacidade</td><td>Até 10 crianças por grupo</td><td>5 vagas</td></tr>
+          <tr><td>Formato</td><td>Grupo de WhatsApp</td><td>Atendimento exclusivo</td></tr>
+          <tr><td>Speakts e ranking</td><td>Sim</td><td>Não</td></tr>
+          <tr><td>Certificado digital PDF</td><td>Gratuito</td><td>Não especificado</td></tr>
+          <tr><td>Certificado físico com tubo</td><td>R$ 50 + frete</td><td>Incluído</td></tr>
+          <tr><td>Frete do certificado físico</td><td>Pelo responsável</td><td>Grátis em todo o Brasil</td></tr>
+          <tr><td>Presente de conclusão</td><td>Premiação 1º lugar ranking</td><td>Incluído para a criança</td></tr>
+          <tr><td>Inclusão de irmãos</td><td>Não especificado</td><td>+R$ 50 por irmão/irmã</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="o-que-vai-praticar">
+      <h2 class="section-title">O que a criança vai praticar</h2>
+
+      <div class="card">
+        <h3>Vocabulário do dia a dia</h3>
+        <p>Palavras e expressões usadas no cotidiano, fundamentais para a comunicação real.</p>
+      </div>
+
+      <div class="card">
+        <h3>Músicas e jogos</h3>
+        <p>Atividades lúdicas que tornam a prática mais divertida e memorável.</p>
+      </div>
+
+      <div class="card">
+        <h3>Escuta e fala</h3>
+        <p>Prática de compreensão auditiva e produção oral no próprio ritmo.</p>
+      </div>
+
+      <div class="card">
+        <h3>Desafios com a mãe</h3>
+        <p>Atividades para realizar em casa com a participação da mãe, fortalecendo o vínculo e o aprendizado.</p>
+      </div>
+    </section>
+
+    <section id="sistema-speakts">
+      <h2 class="section-title">Sistema Speakts</h2>
+
+      <div class="speakts">
+        <p>Apontação semanal:</p>
+        <ul>
+          <li>Enviar áudio de feedback: 10 SPKTS</li>
+          <li>Enviar foto do caderno (3 vezes): 15 SPKTS</li>
+          <li>Concluir desafio e enviar foto: 15 SPKTS</li>
+          <li>Bônus de pontualidade: 5 SPKTS</li>
+          <li><strong>Total semanal: 45 SPKTS</strong></li>
+        </ul>
+        <p>Na semana de recap (última semana do mês): total indicado de 50 SPKTS. Meta para o módulo: 1.110 SPKTS.</p>
+        <p>Os pontos podem ser trocados por aulas VIP, campanhas surpresa e brindes (canecas e cadernos personalizados).</p>
+      </div>
+    </section>
+
+    <section id="certificados">
+      <h2 class="section-title">Certificados</h2>
+
+      <div class="card">
+        <h3>Certificado digital</h3>
+        <p>Gratuito para todos ao concluir o módulo. No Grupo Misto, enviado pelo WhatsApp em PDF. No VIP, não especificado nos materiais.</p>
+      </div>
+
+      <div class="card">
+        <h3>Certificado físico personalizado com tubo</h3>
+        <p>No Grupo Misto: custa R$ 50 mais frete. No VIP: incluído (frete grátis para todo o Brasil).</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>ZAPSpeak — Mentoria de inglês infantil<br>
+    Experiência leve, lúdica e flexível pelo WhatsApp</p>
+  </footer>
+
+  <script>
+    // Storytelling scroll: Progress bar de progresso
+    const progressBar = document.getElementById('progress-bar');
+    
+    function updateProgressBar() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(1, scrollTop / docHeight);
+      progressBar.style.width = `${progress * 100}%`;
+    }
+    
+    // Atualizar na rolagem com throttle
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateProgressBar();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+    
+    // Inicializar progresso
+    updateProgressBar();
+
+    // Reveal on scroll com Intersection Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('revealed');
+          }, index * 100);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    });
+
+    // Observar todas as sections
+    document.querySelectorAll('section').forEach((section, i) => {
+      revealObserver.observe(section);
+    });
+
+    // Hover effects aprimorados para cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.style.transform = 'translateY(-8px) scale(1.02)';
+        card.style.boxShadow = '0 12px 32px rgba(0,0,0,0.15)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      });
+    });
+
+    // Smooth scroll para links internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const startY = window.pageYOffset;
+          const endY = target.getBoundingClientRect().top + window.pageYOffset;
+          const distance = endY - startY;
+          const duration = 1000;
+          const startTime = performance.now();
+          
+          function animateScroll(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentY = startY + (distance * easeOut);
+            
+            window.scrollTo(0, currentY);
+            
+            if (elapsed < duration) {
+              requestAnimationFrame(animateScroll);
+            }
+          }
+          
+          requestAnimationFrame(animateScroll);
+        }
+      });
+    });
+
+    // Typing effect para a chamada principal
+    const heroHeading = document.querySelector('.hero h2');
+    if (heroHeading) {
+      const originalText = heroHeading.textContent;
+      heroHeading.textContent = '';
+      let charIndex = 0;
+      
+      function typeHeroChar() {
+        if (charIndex < originalText.length) {
+          heroHeading.textContent += originalText.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeHeroChar, 50 + Math.random() * 30);
+        }
+      }
+      
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(typeHeroChar, 500);
+            heroObserver.unobserve(entry.target);
+          }
+        });
+      });
+      heroObserver.observe(document.querySelector('.hero'));
+    }
+  </script>
+</body>
+</html>

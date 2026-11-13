@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAPSpeak - Modalidades</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fredoka:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-main: #514477;
+      --purple-dark: #35245F;
+      --green-soft: #8CCB91;
+      --green-light: #DDF4C5;
+      --yellow-pastel: #F8E39A;
+      --lilac-light: #D8C5E8;
+      --pink-light: #F6D8E2;
+      --warm-white: #FFFEFC;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--warm-white);
+      color: var(--purple-dark);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: 'Fredoka', sans-serif; color: var(--purple-main); margin-top: 0; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    header {
+      background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+      color: var(--warm-white);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    header p { font-size: 1rem; opacity: 0.9; }
+
+    nav {
+      background: var(--lilac-light);
+      padding: 0.8rem 2rem;
+    }
+    nav ul {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; justify-content: center; gap: 2rem;
+    }
+    nav a { font-family: 'Nunito', sans-serif; font-size: 0.95rem; color: var(--purple-dark); font-weight: 700; transition: color 0.3s; }
+    nav a:hover { color: var(--purple-dark); }
+
+    .hero {
+      background: linear-gradient(135deg, var(--lilac-light), var(--warm-white));
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .hero h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .hero p { font-family: 'Nunito', sans-serif; font-size: 1.2rem; color: var(--purple-dark); max-width: 800px; margin: 0 auto 2rem; }
+    .btn { display: inline-block; background: var(--purple-main); color: var(--warm-white); padding: 0.8rem 1.8rem; border-radius: 2rem; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1rem; margin: 0.5rem; transition: background 0.3s; }
+    .hero .btn:hover { background: var(--purple-dark); }
+    .btn-whats { background: #25D366; color: white; }
+    .btn-whats:hover { background: #128C7E; }
+
+    section { max-width: 900px; margin: 3rem auto; padding: 2rem; }
+    .section-title { font-size: 2rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--lilac-light); }
+
+    .card {
+      background: var(--warm-white);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+    .card img { border-radius: 0.5rem; margin-bottom: 1rem; width: 100%; height: auto; }
+
+    .modalidades { display: grid; gap: 1.5rem; }
+    @media (min-width: 600px) { .modalidades { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .modalidades { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .comparativo {
+      width: 100%; border-collapse: collapse; margin: 2rem 0;
+    }
+    .comparativo th, .comparativo td {
+      border: 1px solid var(--lilac-light); padding: 0.8rem; text-align: left;
+    }
+    .comparativo th { background: var(--purple-main); color: var(--warm-white); }
+    .comparativo td { background: var(--warm-white); }
+
+    footer {
+      background: var(--purple-dark);
+      color: var(--warm-white);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 2rem; }
+      nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ZAPSpeak</h1>
+    <p>Mentoria de inglês infantil pelo WhatsApp</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="about.html">Sobre</a></li>
+      <li><a href="modalidades.html">Modalidades</a></li>
+      <li><a href="index.html#contato">Fale conosco</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h2>Modalidades de Participação</h2>
+    <p>Duas formas de participar da mentoria: com o engajamento do grupo Speakts ou com atenção exclusiva VIP.</p>
+    <a href="index.html" class="btn">Voltar ao início</a>
+  </section>
+
+  <main>
+
+    <section id="grupo-misto">
+      <h2 class="section-title">Grupo Misto — R$ 50/mês por criança</h2>
+      <div class="card">
+        <h3>Inclui:</h3>
+        <ul>
+          <li>Participação em grupo de WhatsApp (até 10 crianças)</li>
+          <li>Sistema Speakts e ranking</li>
+          <li>Atividades de vocabulário, escuta e fala</li>
+          <li>Desafios para fazer em casa com a mãe</li>
+          <li>Certificado digital em PDF (gratuito)</li>
+          <li>Certificado físico personalizado com tubo: R$ 50 + frete</li>
+        </ul>
+      </div>
+
+      <div class="speakts">
+        <h3>Sistema Speakts</h3>
+        <p>Pontuação semanal:</p>
+        <ul>
+          <li>Enviar áudio de feedback: 10 SPKTS</li>
+          <li>Enviar foto do caderno (3 vezes): 15 SPKTS</li>
+          <li>Concluir desafio e enviar foto: 15 SPKTS</li>
+          <li>Bônus de pontualidade: 5 SPKTS</li>
+          <li><strong>Total semanal: 45 SPKTS</strong></li>
+        </ul>
+        <p>Na semana de recap (última semana): total indicado de 50 SPKTS.</p>
+        <p>Meta para o módulo: 1.110 SPKTS. O primeiro lugar do ranking recebe certificado físico com tubo e presente gratuitamente em casa.</p>
+        <p>Os pontos podem ser trocados por aulas VIP, campanhas surpresa e brindes (canecas e cadernos personalizados).</p>
+      </div>
+    </section>
+
+    <section id="vip-exclusivo">
+      <h2 class="section-title">VIP Exclusivo — R$ 200/mês</h2>
+      <div class="card">
+        <h3>Inclui:</h3>
+        <ul>
+          <li>Atenção exclusiva (5 vagas apenas)</li>
+          <li>Privacidade total para criança e mãe</li>
+          <li>Mesma proposta de aprendizagem das demais modalidades</li>
+          <li>Certificado físico personalizado com tubo (incluído)</li>
+          <li>Frete grátis para todo o Brasil</li>
+          <li>Presente de conclusão de módulo</li>
+          <li>Irmão/irmã: +R$ 50 por criança</li>
+        </ul>
+      </div>
+
+      <p><strong>Observação importante:</strong> O sistema Speakts não é utilizado na modalidade VIP.</p>
+    </section>
+
+    <section id="comparativo">
+      <h2 class="section-title">Comparação Resumida</h2>
+      <table class="comparativo">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Grupo Misto</th>
+            <th>VIP Exclusivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Mensalidade</td><td>R$ 50 por criança</td><td>R$ 200</td></tr>
+          <tr><td>Vagas/capacidade</td><td>Até 10 crianças por grupo</td><td>5 vagas</td></tr>
+          <tr><td>Formato</td><td>Grupo de WhatsApp</td><td>Atendimento exclusivo</td></tr>
+          <tr><td>Speakts e ranking</td><td>Sim</td><td>Não</td></tr>
+          <tr><td>Certificado digital PDF</td><td>Gratuito</td><td>Não especificado</td></tr>
+          <tr><td>Certificado físico com tubo</td><td>R$ 50 + frete</td><td>Incluído</td></tr>
+          <tr><td>Frete do certificado físico</td><td>Pelo responsável</td><td>Grátis em todo o Brasil</td></tr>
+          <tr><td>Presente de conclusão</td><td>1º lugar ranking</td><td>Incluído para a criança</td></tr>
+          <tr><td>Inclusão de irmãos</td><td>Não especificado</td><td>+R$ 50 por irmão/irmã</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>ZAPSpeak — Mentoria de inglês infantil<br>
+    Experiência leve, lúdica e flexível pelo WhatsApp</p>
+  </footer>
+
+</body>
+</html>
