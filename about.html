@@ -2,11 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZAPSpeak - Sobre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>ZAPSpeak - Sobre a Mentoria</title>
+  <meta name="theme-color" content="#514477">
+  <link rel="icon" type="image/jpeg" href="cartaoquadradro.jpeg">
+  <link rel="apple-touch-icon" href="cartaoquadradro.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fredoka:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --purple-main: #514477;
@@ -17,155 +20,319 @@
       --lilac-light: #D8C5E8;
       --pink-light: #F6D8E2;
       --warm-white: #FFFEFC;
+      --text-dark: #2F224A;
+      --whatsapp: #25D366;
+      --shadow-sm: 0 4px 14px rgba(53, 36, 95, 0.06);
+      --shadow-md: 0 10px 25px rgba(53, 36, 95, 0.1);
+      --radius-md: 20px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: 'Nunito', sans-serif;
       background-color: var(--warm-white);
-      color: var(--purple-dark);
-      margin: 0;
-      padding: 0;
+      color: var(--text-dark);
       line-height: 1.6;
+      padding-bottom: 70px;
     }
-    h1, h2, h3 { font-family: 'Fredoka', sans-serif; color: var(--purple-main); margin-top: 0; }
+
+    h1, h2, h3 { font-family: 'Fredoka', cursive, sans-serif; color: var(--purple-dark); }
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; height: auto; display: block; }
 
     header {
       background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
-      color: var(--warm-white);
-      padding: 1.5rem 2rem;
-      text-align: center;
+      color: #fff;
+      padding: 0.85rem 1.2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
-    header p { font-size: 1rem; opacity: 0.9; }
 
-    nav {
-      background: var(--lilac-light);
-      padding: 0.8rem 2rem;
+    .header-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    nav ul {
-      list-style: none; margin: 0; padding: 0;
-      display: flex; justify-content: center; gap: 2rem;
+
+    .brand-group { display: flex; align-items: center; gap: 0.75rem; }
+    .brand-logo { width: 42px; height: 42px; border-radius: 12px; object-fit: cover; }
+    .brand-title { font-size: 1.45rem; font-weight: 700; color: #fff; }
+
+    /* Menu Hambúrguer */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
     }
-    nav a { font-family: 'Nunito', sans-serif; font-size: 0.95rem; color: var(--purple-dark); font-weight: 700; transition: color 0.3s; }
-    nav a:hover { color: var(--purple-dark); }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      border-radius: 3px;
+      transition: all 0.3s;
+    }
+
+    .menu-toggle.active span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
+
+    .nav-menu { display: flex; list-style: none; gap: 1.2rem; align-items: center; }
+    .nav-menu a { font-weight: 700; color: rgba(255,255,255,0.9); font-size: 0.95rem; }
+    .nav-menu a:hover { color: #fff; text-decoration: underline; }
 
     .hero {
-      background: linear-gradient(135deg, var(--lilac-light), var(--warm-white));
-      padding: 3rem 2rem;
+      background: linear-gradient(175deg, #F3ECF9 0%, #FFFFFF 100%);
+      padding: 3rem 1.25rem 2.5rem;
       text-align: center;
     }
-    .hero h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
-    .hero p { font-family: 'Nunito', sans-serif; font-size: 1.2rem; color: var(--purple-dark); max-width: 800px; margin: 0 auto 2rem; }
-    .btn { display: inline-block; background: var(--purple-main); color: var(--warm-white); padding: 0.8rem 1.8rem; border-radius: 2rem; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1rem; margin: 0.5rem; transition: background 0.3s; }
-    .hero .btn:hover { background: var(--purple-dark); }
-    .btn-whats { background: #25D366; color: white; }
-    .btn-whats:hover { background: #128C7E; }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 0.75rem; }
+    .hero p { font-size: 1.08rem; color: #50446b; max-width: 650px; margin: 0 auto 1.5rem; }
 
-    section { max-width: 900px; margin: 3rem auto; padding: 2rem; }
-    .section-title { font-size: 2rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--lilac-light); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      padding: 0.8rem 1.6rem;
+      border-radius: 30px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      background: var(--purple-main);
+      color: #fff;
+      transition: all 0.25s;
+    }
+    .btn:hover { background: var(--purple-dark); transform: translateY(-2px); }
 
-    .card {
-      background: var(--warm-white);
-      border-radius: 1rem;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-    .card img { border-radius: 0.5rem; margin-bottom: 1rem; width: 100%; height: auto; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2.5rem 1.25rem; }
 
-    .comparativo {
-      width: 100%; border-collapse: collapse; margin: 2rem 0;
+    .content-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: 2rem 1.6rem;
+      margin-bottom: 1.8rem;
+      border: 1px solid rgba(81, 68, 119, 0.08);
     }
-    .comparativo th, .comparativo td {
-      border: 1px solid var(--lilac-light); padding: 0.8rem; text-align: left;
+
+    .content-card h2 { font-size: 1.5rem; margin-bottom: 0.85rem; color: var(--purple-main); }
+    .content-card ul, .content-card ol { padding-left: 1.3rem; margin-top: 0.8rem; }
+    .content-card li { margin-bottom: 0.65rem; color: #4a3e61; }
+
+    .image-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.8rem 0;
     }
-    .comparativo th { background: var(--purple-main); color: var(--warm-white); }
-    .comparativo td { background: var(--warm-white); }
+
+    .image-box {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      background: #fff;
+      border: 1px solid rgba(81,68,119,0.1);
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .image-box-desc {
+      padding: 0.85rem 1rem;
+      font-size: 0.88rem;
+      color: #6a5d85;
+      font-weight: 600;
+      text-align: center;
+    }
 
     footer {
       background: var(--purple-dark);
-      color: var(--warm-white);
+      color: rgba(255,255,255,0.8);
       text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
+      padding: 2.5rem 1.25rem;
+      margin-top: 2.5rem;
+      font-size: 0.88rem;
     }
 
-    @media (max-width: 600px) {
-      .hero h2 { font-size: 2rem; }
-      nav ul { gap: 1rem; }
+    /* Barra fixa mobile */
+    .mobile-bottom-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(53, 36, 95, 0.96);
+      backdrop-filter: blur(8px);
+      padding: 0.65rem 1rem;
+      z-index: 888;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .mobile-bottom-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      min-height: 44px;
+      background: var(--whatsapp);
+      color: #fff;
+      border-radius: 30px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 62px;
+        left: 0;
+        right: 0;
+        background: var(--purple-dark);
+        flex-direction: column;
+        padding: 1.5rem 1.25rem;
+        gap: 0.85rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        transform: translateY(-150%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+      .nav-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      .nav-menu a { display: block; padding: 0.65rem; font-size: 1.05rem; }
+      .image-showcase { grid-template-columns: 1fr; }
+      .mobile-bottom-bar { display: block; }
+      .hero h1 { font-size: 1.85rem; }
+      .content-card { padding: 1.6rem 1.2rem; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>ZAPSpeak</h1>
-    <p>Mentoria de inglês infantil pelo WhatsApp</p>
+    <div class="header-container">
+      <a href="index.html" class="brand-group">
+        <img src="cartaoquadradro.jpeg" alt="Logo ZAPSpeak" class="brand-logo">
+        <span class="brand-title">ZAPSpeak</span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" onclick="closeMenu()">Início</a></li>
+          <li><a href="about.html" style="color: var(--yellow-pastel);" onclick="closeMenu()">Sobre</a></li>
+          <li><a href="modalidades.html" onclick="closeMenu()">Modalidades</a></li>
+          <li><a href="contato.html" onclick="closeMenu()">Contato</a></li>
+          <li><a href="https://wa.me/5511999999999" target="_blank" style="color: #25D366;" onclick="closeMenu()">💬 WhatsApp</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Início</a></li>
-      <li><a href="about.html">Sobre</a></li>
-      <li><a href="modalidades.html">Modalidades</a></li>
-      <li><a href="#contato">Fale conosco</a></li>
-    </ul>
-  </nav>
-
   <section class="hero">
-    <h2>Sobre a ZAPSpeak</h2>
-    <p>Mentoria de inglês infantil flexível, lúdica e feita no ritmo da família, pelo WhatsApp.</p>
-    <a href="index.html" class="btn">Voltar ao início</a>
+    <h1>Sobre a ZAPSpeak</h1>
+    <p>Uma proposta pensada para unir aprendizado infantil e acolhimento familiar de forma leve e descomplicada pelo WhatsApp.</p>
+    <a href="index.html" class="btn">← Voltar à Página Principal</a>
   </section>
 
-  <main>
+  <main class="container">
+    <div class="content-card">
+      <h2>Nossa Missão</h2>
+      <p>Ajudar crianças a aprenderem inglês sem traumas e sem cobranças maçantes. Com a participação afetuosa da mãe ou responsável, a criança ganha confiança e segurança para explorar novos sons, palavras e brincadeiras no novo idioma.</p>
+    </div>
 
-    <section id="missao">
-      <h2 class="section-title">Nossa Missão</h2>
-      <div class="card">
-        <h3>Ajudar crianças a aprender inglês de forma leve</h3>
-        <p>A ZAPSpeak oferece uma experiência de aprendizagem em que a criança e a mãe estudam juntas, no próprio ritmo e sem horários fixos. O conteúdo é trabalhado por meio de vocabulário do dia a dia, músicas, jogos, desafios e atividades de escuta e fala.</p>
+    <div class="image-showcase">
+      <div class="image-box">
+        <img src="poster1.jpeg" alt="Apostila ZAPSpeak Básico 1" loading="lazy">
+        <div class="image-box-desc">📖 Apostila Básico 1: Ilustrada e divertida</div>
       </div>
-    </section>
-
-    <section id="proposta">
-      <h2 class="section-title">Proposta de Aprendizagem</h2>
-      <div class="card">
-        <ul>
-          <li>Aprendizagem de vocabulário usado no cotidiano</li>
-          <li>Uso de músicas, jogos, desafios e atividades lúdicas</li>
-          <li>Prática de escuta e fala</li>
-          <li>Atividades para realizar em casa com a participação da mãe</li>
-          <li>Aprendizagem pelo WhatsApp, sem necessidade de instalar outro aplicativo</li>
-          <li>Flexibilidade para estudar no tempo disponível da família</li>
-          <li>Ausência de horários fixos ou compromissos rígidos</li>
-          <li>Incentivo à participação, à tentativa e à continuidade, sem pressão</li>
-        </ul>
+      <div class="image-box">
+        <img src="poster2.jpeg" alt="Material Didático Infantil" loading="lazy">
+        <div class="image-box-desc">🎨 Conteúdo planejado para a rotina em casa</div>
       </div>
-    </section>
+    </div>
 
-    <section id="funciona">
-      <h2 class="section-title">Como Funciona</h2>
-      <ol style="max-width: 800px; margin: 0 auto;">
-        <li>A pessoa responsável chama a ZAPSpeak pelo WhatsApp e informa a idade da criança.</li>
-        <li>Escolhe uma das modalidades: <strong>Grupo Misto</strong> ou <strong>VIP Exclusivo</strong>.</li>
-        <li>Entra no grupo correspondente e recebe o material de boas-vindas.</li>
-        <li>A criança e a mãe começam a participar das atividades pelo WhatsApp.</li>
+    <div class="content-card">
+      <h2>Proposta de Aprendizagem</h2>
+      <ul>
+        <li><strong>Vocabulário do dia a dia:</strong> Palavras reais aplicadas no cotidiano da criança.</li>
+        <li><strong>Músicas e brincadeiras:</strong> Fixação de pronúncia de maneira natural e descontraída.</li>
+        <li><strong>Prática de fala e escuta:</strong> Áudios interativos no WhatsApp para soltar a voz sem timidez.</li>
+        <li><strong>Vínculo mãe e filho:</strong> Desafios divertidos para realizar em família.</li>
+        <li><strong>Zero complicação:</strong> Sem necessidade de baixar novos aplicativos ou criar cadastros difíceis.</li>
+        <li><strong>Flexibilidade total:</strong> Cada família estuda no horário que achar mais conveniente.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h2>Como Funciona</h2>
+      <ol>
+        <li>Você chama nossa equipe pelo WhatsApp e nos conta a idade da criança.</li>
+        <li>Escolhe a modalidade mais indicada: Grupo Misto ou VIP Exclusivo.</li>
+        <li>Recebe o material de boas-vindas e ingressa na mentoria.</li>
+        <li>Começa a receber as missões e atividades diretamente no aplicativo!</li>
       </ol>
-    </section>
-
+    </div>
   </main>
 
   <footer>
-    <p>ZAPSpeak — Mentoria de inglês infantil<br>
-    Experiência leve, lúdica e flexível pelo WhatsApp</p>
+    <p>&copy; 2026 ZAPSpeak — Mentoria de inglês infantil. Experiência leve, lúdica e flexível pelo WhatsApp.</p>
   </footer>
 
+  <div class="mobile-bottom-bar">
+    <a href="https://wa.me/5511999999999" target="_blank" class="mobile-bottom-btn">
+      💬 Falar no WhatsApp Oficial
+    </a>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('open');
+    });
+
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  </script>
 </body>
 </html>

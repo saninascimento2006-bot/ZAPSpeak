@@ -2,40 +2,62 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZAPSpeak - Mentoria de Inglês Infantil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>ZAPSpeak - Mentoria de Inglês Infantil pelo WhatsApp</title>
+  <meta name="description" content="Mentoria de inglês infantil flexível, lúdica e leve para mães e crianças aprenderem juntas pelo WhatsApp.">
+  <meta name="theme-color" content="#514477">
+  <link rel="icon" type="image/jpeg" href="cartaoquadradro.jpeg">
+  <link rel="apple-touch-icon" href="cartaoquadradro.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fredoka:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --purple-main: #514477;
       --purple-dark: #35245F;
+      --purple-light: #6A5B95;
       --green-soft: #8CCB91;
       --green-light: #DDF4C5;
       --yellow-pastel: #F8E39A;
       --lilac-light: #D8C5E8;
       --pink-light: #F6D8E2;
       --warm-white: #FFFEFC;
+      --text-dark: #2F224A;
+      --whatsapp: #25D366;
+      --whatsapp-dark: #1ea952;
+      --shadow-sm: 0 4px 14px rgba(53, 36, 95, 0.06);
+      --shadow-md: 0 10px 25px rgba(53, 36, 95, 0.1);
+      --shadow-lg: 0 16px 36px rgba(53, 36, 95, 0.14);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
     }
 
     body {
-      font-family: 'Nunito', sans-serif;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--warm-white);
-      color: var(--purple-dark);
-      margin: 0;
-      padding: 0;
+      color: var(--text-dark);
       line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 72px; /* Espaço para a barra flutuante mobile */
     }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Fredoka', sans-serif;
-      color: var(--purple-main);
-      margin-top: 0;
+    h1, h2, h3, h4 {
+      font-family: 'Fredoka', cursive, sans-serif;
+      color: var(--purple-dark);
+      line-height: 1.25;
     }
 
     a {
@@ -43,648 +65,1929 @@
       color: inherit;
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* === PATH FIX: Base path for images === */
-    /* Uncomment the appropriate base path depending on deployment:
-       1. Local server (same directory): ""
-       2. GitHub Pages / relative: "./"
-       3. Absolute path: "/ZAPSpeak/"
-    */
-    /* <base href="./"> */
-
-    /* === OU use caminhos absolutos relativos à pasta === */
-    .img-poster1 { content: url('poster1.jpeg'); }
-    .img-moeda { content: url('moeda.jpeg'); }
-    .img-logo { content: url('cartaoquadradro.jpeg'); }
-    .img-formas { content: url('formas.jpeg'); }
-    /* ====================================== */
-
-    /* === Fallback: se imagens não carregarem, mostra cores sólidas === */
-    .fallback-img {
-      background-size: cover;
-      background-position: center;
-      background-color: var(--lilac-light);
-    }
-
-    /* === Progresso de leitura (storytelling) === */
+    /* === BARRA DE PROGRESSO DE LEITURA === */
     .reveal-progress {
       position: fixed;
       top: 0;
       left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--purple-main), var(--green-soft));
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple-main), var(--whatsapp), var(--yellow-pastel));
       z-index: 1000;
-      transition: width 0.1s linear;
+      width: 0%;
+      transition: width 0.1s ease-out;
     }
 
-    /* === Header === */
+    /* === HEADER & NAVEGAÇÃO MOBILE-FIRST === */
     header {
       background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
       color: var(--warm-white);
-      padding: 1.5rem 2rem;
-      text-align: center;
+      padding: 0.85rem 1.2rem;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
 
-    header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    /* Logo usando background-image */
-    .site-logo {
-      width: 40px;
-      height: 40px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-color: var(--warm-white);
-      border-radius: 0.5rem;
-    }
-
-    header p {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    /* === Nav === */
-    nav {
-      background: var(--lilac-light);
-      padding: 0.8rem 2rem;
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .brand-group {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
     }
 
-    nav a {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      color: var(--purple-dark);
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: cover;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+
+    .brand-text-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 1.45rem;
+      color: #fff;
       font-weight: 700;
-      transition: color 0.3s;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
     }
 
-    nav a:hover {
-      color: var(--purple-dark);
+    .brand-tagline {
+      font-size: 0.76rem;
+      color: var(--yellow-pastel);
+      font-weight: 700;
+      display: block;
+      letter-spacing: 0.2px;
     }
 
-    /* === Hero Section === */
+    /* Botão Hambúrguer Mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 32px;
+      height: 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 999;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      border-radius: 3px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(10.5px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-10.5px) rotate(-45deg);
+    }
+
+    /* Menu de Navegação */
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+      padding: 0.45rem 0.85rem;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+      display: inline-block;
+    }
+
+    .nav-menu a:hover, .nav-menu a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .nav-cta {
+      background: var(--whatsapp) !important;
+      color: #fff !important;
+      font-weight: 800 !important;
+      padding: 0.55rem 1.25rem !important;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    }
+
+    .nav-cta:hover {
+      background: var(--whatsapp-dark) !important;
+      transform: translateY(-2px);
+    }
+
+    /* === HERO SECTION === */
     .hero {
-      background: linear-gradient(135deg, var(--lilac-light), var(--warm-white));
-      padding: 3rem 2rem;
-      text-align: center;
+      background: linear-gradient(175deg, #F3ECF9 0%, #FFFFFF 100%);
+      padding: 3.5rem 1.25rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--yellow-pastel);
+      color: var(--purple-dark);
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+      color: var(--purple-dark);
+      word-break: break-word;
+    }
+
+    .hero h1 span {
+      color: var(--purple-main);
       position: relative;
     }
 
-    .hero::before {
-      content: '';
+    .hero p {
+      font-size: 1.15rem;
+      color: #4a3e61;
+      margin-bottom: 1.8rem;
+      max-width: 540px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      padding: 0.85rem 1.6rem;
+      border-radius: 40px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.02rem;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      touch-action: manipulation;
+    }
+
+    .btn-primary {
+      background: var(--purple-main);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(81, 68, 119, 0.28);
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--purple-main);
+      border: 2px solid var(--purple-main);
+    }
+
+    .btn-outline:hover {
+      background: var(--lilac-light);
+    }
+
+    .hero-highlights {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .highlight-pill {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--purple-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid rgba(81, 68, 119, 0.1);
+    }
+
+    /* Hero Imagem de Destaque */
+    .hero-media {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: #fff;
+      border: 4px solid #fff;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .hero-floating-card {
+      position: absolute;
+      bottom: -12px;
+      left: 10px;
+      background: #fff;
+      padding: 0.75rem 1.15rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border: 2px solid var(--green-light);
+      max-width: calc(100% - 20px);
+    }
+
+    .floating-coin {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: contain;
+      flex-shrink: 0;
+      animation: spinCoin 16s linear infinite;
+    }
+
+    @keyframes spinCoin {
+      0% { transform: rotateY(0deg); }
+      50% { transform: rotateY(180deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    .floating-card-text strong {
+      display: block;
+      color: var(--purple-dark);
+      font-size: 0.92rem;
+      line-height: 1.2;
+    }
+
+    .floating-card-text span {
+      font-size: 0.78rem;
+      color: #6a5d85;
+    }
+
+    /* === SEÇÕES GERAIS === */
+    section {
+      padding: 4rem 1.25rem;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: var(--purple-main);
+      background: var(--lilac-light);
+      padding: 0.35rem 0.85rem;
+      border-radius: 30px;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--purple-dark);
+      margin-bottom: 0.75rem;
+      word-break: break-word;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: #554870;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* === GRIDS E CARDS RESPONSIVOS === */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(81, 68, 119, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--lilac-light);
+    }
+
+    .card-media {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      background: #F4EFF8;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .card:hover .card-media img {
+      transform: scale(1.04);
+    }
+
+    .card-media-overlay {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--purple-main), var(--green-soft));
-      border-radius: 2px;
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.2rem;
-      color: var(--purple-dark);
-      max-width: 800px;
-      margin: 0 auto 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      background: var(--purple-main);
-      color: var(--warm-white);
-      padding: 0.8rem 1.8rem;
-      border-radius: 2rem;
-      font-family: 'Fredoka', sans-serif;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(to top, rgba(53, 36, 95, 0.85) 0%, transparent 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
       font-weight: 700;
-      font-size: 1rem;
-      margin: 0.5rem;
-      transition: background 0.3s;
     }
 
-    .hero .btn:hover {
-      background: var(--purple-dark);
+    .card-body {
+      padding: 1.6rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .btn-whats {
-      background: #25D366;
-      color: white;
+    .card-body h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.65rem;
+      color: var(--purple-dark);
     }
 
-    .btn-whats:hover {
-      background: #128C7E;
+    .card-body p {
+      color: #554870;
+      font-size: 0.96rem;
+      line-height: 1.6;
     }
 
-    /* === Seções com animação de revelação === */
-    section {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 2rem;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
-                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    /* === COMO FUNCIONA (STEPS) === */
+    .steps-section {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8F4FD 100%);
     }
 
-    section.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--lilac-light);
-      padding-right: 1rem;
-    }
-
-    /* === Cartões === */
-    .card {
-      background: var(--warm-white);
-      border-radius: 1rem;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                  box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: default;
-    }
-
-    .card:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-    }
-
-    .card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Card com imagem de fundo */
-    .card-with-image {
+    .step-card {
+      background: #fff;
+      padding: 1.8rem 1.4rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
       position: relative;
-      overflow: hidden;
-      border-radius: 1rem 1rem 0 0;
     }
 
-    .card-with-image img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 1rem 1rem 0 0;
+    .step-card:hover {
+      border-color: var(--green-soft);
+      transform: translateY(-4px);
     }
 
-    .card-with-image .card-body {
-      position: relative;
-      z-index: 2;
-      padding: 1.5rem;
+    .step-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--purple-main);
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.1rem;
+      box-shadow: 0 4px 10px rgba(81, 68, 119, 0.25);
     }
 
-    .card-with-image .card-body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(81,68,119,0.3), transparent);
-      border-radius: 1rem 1rem 0 0;
-      z-index: 1;
+    .step-card:nth-child(2) .step-number { background: #8CCB91; color: var(--purple-dark); }
+    .step-card:nth-child(3) .step-number { background: #F8E39A; color: var(--purple-dark); }
+    .step-card:nth-child(4) .step-number { background: #D8C5E8; color: var(--purple-dark); }
+
+    .step-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
     }
 
-    /* === Modalidades === */
-    .modalidades {
+    .step-card p {
+      font-size: 0.92rem;
+      color: #5b4f73;
+    }
+
+    /* === GALERIA DE MATERIAIS === */
+    .gallery-section {
+      background: #FBF9FD;
+    }
+
+    .gallery-grid {
       display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
     }
 
-    @media (min-width: 600px) {
-      .modalidades {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (min-width: 900px) {
-      .modalidades {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-    }
-
-    /* === Tabela Comparativo === */
-    .comparativo {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-    }
-
-    .comparativo th, .comparativo td {
-      border: 1px solid var(--lilac-light);
-      padding: 0.8rem;
-      text-align: left;
-    }
-
-    .comparativo th {
-      background: var(--purple-main);
-      color: var(--warm-white);
-    }
-
-    .comparativo td {
-      background: var(--warm-white);
-    }
-
-    /* === Speakts com efeito moeda 3D === */
-    .speakts {
-      background: var(--green-soft);
-      border-radius: 1rem;
-      padding: 2rem;
-      margin: 2rem 0;
+    .gallery-item {
+      background: #fff;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      cursor: pointer;
       position: relative;
     }
 
-    .speakts::before {
-      content: '';
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .gallery-thumb-container {
+      width: 100%;
+      height: 270px;
+      overflow: hidden;
+      position: relative;
+      background: #EDE6F4;
+    }
+
+    .gallery-thumb-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .gallery-item:hover .gallery-thumb-container img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .gallery-caption h4 {
+      font-size: 1.05rem;
+      color: var(--purple-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .gallery-caption span {
+      font-size: 0.82rem;
+      color: #72648d;
+      font-weight: 600;
+    }
+
+    .gallery-badge {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 60px;
-      height: 60px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-color: var(--warm-white);
+      top: 10px;
+      right: 10px;
+      background: rgba(81, 68, 119, 0.88);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 12px;
+      font-weight: 700;
+      backdrop-filter: blur(4px);
+    }
+
+    /* === MODALIDADES & PREÇOS === */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .pricing-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      box-shadow: var(--shadow-md);
+      border: 3px solid transparent;
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.misto {
+      border-color: var(--lilac-light);
+    }
+
+    .pricing-card.vip {
+      border-color: var(--green-soft);
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5FBF5 100%);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pricing-tag {
+      position: absolute;
+      top: -14px;
+      right: 20px;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .tag-purple {
+      background: var(--purple-main);
+      color: #fff;
+    }
+
+    .tag-green {
+      background: var(--green-soft);
+      color: var(--purple-dark);
+    }
+
+    .pricing-header {
+      margin-bottom: 1.5rem;
+      border-bottom: 2px dashed #E5DCF0;
+      padding-bottom: 1.3rem;
+    }
+
+    .pricing-header h3 {
+      font-size: 1.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      margin-top: 0.7rem;
+    }
+
+    .price-currency {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--purple-main);
+    }
+
+    .price-value {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.9rem;
+      font-weight: 700;
+      color: var(--purple-dark);
+      line-height: 1;
+    }
+
+    .price-period {
+      font-size: 0.95rem;
+      color: #6c5f87;
+      font-weight: 600;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .feature-list li {
+      padding: 0.6rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.96rem;
+      color: #4a3e61;
+      border-bottom: 1px solid rgba(81, 68, 119, 0.06);
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      animation: spin 20s linear infinite;
-      z-index: 1;
+      background: var(--green-light);
+      color: #2b7736;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-top: 2px;
     }
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    /* === TABELA COMPARATIVA RESPONSIVA COM INDICADOR DE SCROLL === */
+    .table-wrapper {
+      position: relative;
+      margin-top: 2rem;
     }
 
-    /* === Rodapé === */
+    .mobile-scroll-hint {
+      display: none;
+      font-size: 0.82rem;
+      color: #72648d;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .table-container {
+      background: #fff;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid rgba(81, 68, 119, 0.1);
+    }
+
+    .comparativo {
+      width: 100%;
+      min-width: 580px; /* Garante que a tabela não fique esmagada em telas estreitas */
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .comparativo th, .comparativo td {
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .comparativo thead th {
+      background: var(--purple-main);
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .comparativo tbody tr {
+      border-bottom: 1px solid #ECE7F3;
+    }
+
+    .comparativo tbody tr:nth-child(even) {
+      background-color: #FAFAFD;
+    }
+
+    .comparativo td:first-child {
+      font-weight: 700;
+      color: var(--purple-dark);
+      width: 38%;
+    }
+
+    /* === SISTEMA SPEAKTS === */
+    .speakts-box {
+      background: linear-gradient(135deg, #71B977 0%, #509756 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 2.8rem 2.2rem;
+      box-shadow: var(--shadow-lg);
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .speakts-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .speakts-box h3 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .speakts-box p {
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.94);
+      margin-bottom: 1.3rem;
+      line-height: 1.6;
+    }
+
+    .speakts-table {
+      width: 100%;
+      background: rgba(255,255,255,0.18);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 1.3rem;
+      border-collapse: collapse;
+      backdrop-filter: blur(4px);
+    }
+
+    .speakts-table td {
+      padding: 0.7rem 1.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.95rem;
+    }
+
+    .speakts-table tr:last-child td {
+      border-bottom: none;
+      font-weight: 800;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .speakts-coin-wrapper {
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .speakts-coin-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: contain;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      animation: spinCoin 18s linear infinite;
+      cursor: pointer;
+      border: 4px solid rgba(255, 255, 255, 0.45);
+      background: #fff;
+    }
+
+    /* === CERTIFICADOS === */
+    .cert-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      border-left: 6px solid var(--purple-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cert-card.destaque {
+      border-left-color: var(--green-soft);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F5FBF5 100%);
+    }
+
+    .cert-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.55rem;
+    }
+
+    /* === CONTATO E CTA BANNER === */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-main) 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .cta-banner h2 {
+      color: #fff;
+      font-size: 2.3rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .cta-banner p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: var(--lilac-light);
+    }
+
+    /* === FOOTER === */
     footer {
       background: var(--purple-dark);
-      color: var(--warm-white);
+      color: #fff;
+      padding: 3.2rem 1.25rem 2rem;
+      border-top: 5px solid var(--green-soft);
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .footer-brand h3 {
+      color: #fff;
+      font-size: 1.45rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      max-width: 380px;
+    }
+
+    .footer-col h4 {
+      color: var(--yellow-pastel);
+      font-size: 1.05rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.55rem;
+    }
+
+    .footer-col a {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 1.6rem;
       text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.6);
     }
 
-    /* === Responsividade === */
-    @media (max-width: 600px) {
-      .hero h2 { font-size: 2rem; }
-      nav ul { gap: 1rem; }
+    /* === BARRA FIXA DE AÇÃO MOBILE (BOTTOM BAR) === */
+    .mobile-bottom-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(53, 36, 95, 0.96);
+      backdrop-filter: blur(8px);
+      padding: 0.65rem 1rem;
+      z-index: 888;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    /* === Tipografia === */
-    .typing-partial {
+    .mobile-bottom-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .mobile-bottom-btn {
+      flex: 1;
+      min-height: 44px;
+      padding: 0.65rem 0.8rem;
+      border-radius: 30px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      text-align: center;
+    }
+
+    .mobile-btn-whatsapp {
+      background: var(--whatsapp);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.4);
+    }
+
+    .mobile-btn-plans {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* === MODAL LIGHTBOX MOBILE FRIENDLY === */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(25, 16, 42, 0.92);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-dialog {
+      background: #fff;
+      border-radius: var(--radius-md);
+      max-width: 800px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: 700;
+      z-index: 20;
+      border: none;
+      touch-action: manipulation;
+    }
+
+    .lightbox-image-area {
+      background: #160F22;
+      max-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      border-right: 2px solid var(--purple-main);
-      white-space: nowrap;
-      margin-right: 4px;
+    }
+
+    .lightbox-image-area img {
+      max-width: 100%;
+      max-height: 60vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lightbox-details {
+      padding: 1.25rem 1.5rem;
+      background: #fff;
+    }
+
+    .lightbox-details h3 {
+      font-size: 1.3rem;
+      color: var(--purple-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .lightbox-details p {
+      color: #554870;
+      font-size: 0.92rem;
+    }
+
+    /* ==============================================
+       === REGRAS DE MEDIA QUERY PARA CELULAR / TABLET ===
+       ============================================== */
+    @media (max-width: 992px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.2rem;
+      }
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .hero-highlights {
+        justify-content: center;
+      }
+      .hero-media {
+        max-width: 380px;
+        margin: 0 auto;
+      }
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+      .speakts-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .speakts-coin-wrapper {
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 75px; /* Espaço para barra inferior */
+      }
+
+      /* Ativação do Menu Hambúrguer */
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 66px;
+        left: 0;
+        right: 0;
+        background: var(--purple-dark);
+        flex-direction: column;
+        padding: 1.5rem 1.25rem;
+        gap: 0.85rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        transform: translateY(-150%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .nav-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-menu li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 0.75rem 1rem;
+        font-size: 1.05rem;
+        width: 100%;
+      }
+
+      .nav-cta {
+        margin-top: 0.5rem;
+      }
+
+      /* Barra de ação fixa inferior ativa no mobile */
+      .mobile-bottom-bar {
+        display: block;
+      }
+
+      /* Ajustes de tipografia e espaçamentos */
+      section {
+        padding: 3rem 1.15rem;
+      }
+
+      .hero {
+        padding: 2.5rem 1.15rem 2.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2.15rem;
+      }
+
+      .hero p {
+        font-size: 1.05rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .hero-image-wrapper img {
+        height: 320px;
+      }
+
+      .section-title {
+        font-size: 1.85rem;
+      }
+
+      .section-subtitle {
+        font-size: 0.98rem;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .grid-4 {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .gallery-thumb-container {
+        height: 250px;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .pricing-card {
+        padding: 2.2rem 1.5rem;
+      }
+
+      .mobile-scroll-hint {
+        display: block;
+      }
+
+      .cta-banner {
+        padding: 2.8rem 1.25rem;
+      }
+
+      .cta-banner h2 {
+        font-size: 1.85rem;
+      }
+
+      .cta-banner p {
+        font-size: 1rem;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-brand h3 {
+        justify-content: center;
+      }
+
+      .footer-brand p {
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 1.85rem;
+      }
+      .brand-title {
+        font-size: 1.3rem;
+      }
+      .brand-logo {
+        width: 38px;
+        height: 38px;
+      }
+      .price-value {
+        font-size: 2.5rem;
+      }
+      .speakts-box {
+        padding: 2rem 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Barra de progresso para storytelling -->
+  <!-- Barra de progresso de leitura -->
   <div class="reveal-progress" id="progress-bar"></div>
 
+  <!-- HEADER COM MENU MOBILE -->
   <header>
-    <!-- Logo da marca usando imagem local -->
-    <div class="site-logo" style="background-image: url('cartaoquadradro.jpeg');" aria-hidden="true"></div>
-    <h1>ZAPSpeak</h1>
-    <p>Mentoria de inglês infantil pelo WhatsApp</p>
+    <div class="header-container">
+      <a href="index.html" class="brand-group" aria-label="ZAPSpeak Página Inicial">
+        <img src="cartaoquadradro.jpeg" alt="Logo ZAPSpeak" class="brand-logo">
+        <div class="brand-text-block">
+          <span class="brand-title">ZAPSpeak</span>
+          <span class="brand-tagline">Mentoria de Inglês Infantil</span>
+        </div>
+      </a>
+
+      <!-- Botão Hambúrguer -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir Menu de Navegação">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Menu Principal -->
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#sobre" onclick="closeMenu()">Sobre</a></li>
+          <li><a href="#como" onclick="closeMenu()">Como Funciona</a></li>
+          <li><a href="#materiais" onclick="closeMenu()">Materiais</a></li>
+          <li><a href="#modalidades" onclick="closeMenu()">Modalidades</a></li>
+          <li><a href="#speakts" onclick="closeMenu()">Speakts</a></li>
+          <li><a href="https://wa.me/5511999999999" target="_blank" class="nav-cta" onclick="closeMenu()">💬 WhatsApp</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#como">Como funciona</a></li>
-      <li><a href="#modalidades">Modalidades</a></li>
-      <li><a href="#contato">Fale conosco</a></li>
-    </ul>
-  </nav>
-
+  <!-- HERO SECTION -->
   <section class="hero">
-    <h2>Aprender inglês em família</h2>
-    <p>Uma experiência leve, lúdica e flexível para criança e mãe participarem juntas, no próprio ritmo e pelo WhatsApp.</p>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          ✨ Inglês leve, lúdico e em família
+        </div>
+        <h1>Aprender inglês juntos é <span>muito mais divertido</span>!</h1>
+        <p>Uma mentoria flexível para criança e mãe participarem juntas, no próprio ritmo e direto pelo WhatsApp. Sem pressão e sem horários rígidos.</p>
+        
+        <div class="hero-buttons">
+          <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-whatsapp">
+            💬 Conversar no WhatsApp
+          </a>
+          <a href="#modalidades" class="btn btn-primary">
+            Ver Modalidades
+          </a>
+          <a href="#materiais" class="btn btn-outline">
+            Ver Apostila
+          </a>
+        </div>
 
-    <div>
-      <a href="https://wa.me/5511999999999" class="btn btn-whats">Conversar no WhatsApp</a>
-      <a href="#sobre" class="btn">Saiba mais</a>
+        <div class="hero-highlights">
+          <span class="highlight-pill">✓ Direto pelo WhatsApp</span>
+          <span class="highlight-pill">✓ Participação da mãe</span>
+          <span class="highlight-pill">✓ Sem horários fixos</span>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <div class="hero-image-wrapper" onclick="openLightbox('poster1.jpeg', 'Apostila ZAPSpeak Básico 1', 'Capa oficial da apostila com ilustrações acolhedoras pensadas para o aprendizado familiar.')">
+          <img src="poster1.jpeg" alt="Capa da Apostila ZAPSpeak Básico 1 - Criança e mãe estudando juntas">
+        </div>
+        <div class="hero-floating-card">
+          <img src="moeda.jpeg" alt="Moeda Speakts" class="floating-coin">
+          <div class="floating-card-text">
+            <strong>Sistema Speakts</strong>
+            <span>Recompensas e gamificação</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <main>
-
-    <section id="sobre">
-      <h2 class="section-title">Sobre a ZAPSpeak</h2>
-
-      <!-- Card com imagem da poster1 -->
-      <div class="card card-with-image">
-        <div class="card-body">
-          <img src="poster1.jpeg" alt="Criança e mãe estudando inglês juntos - capa da apostila">
-          <h3>Aprender juntos é mais divertido</h3>
-          <p>A ZAPSpeak foi criada para que mães e filhos aprendam inglês juntos, no ritmo da família. Atividades acontecem pelo WhatsApp, com vocabulário do dia a dia, músicas, jogos e desafios criativos.</p>
-        </div>
+  <!-- SEÇÃO SOBRE -->
+  <section id="sobre">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Conheça o Projeto</span>
+        <h2 class="section-title">Sobre a ZAPSpeak</h2>
+        <p class="section-subtitle">Construímos uma ponte acolhedora entre o aprendizado do inglês e o vínculo familiar diário.</p>
       </div>
 
-      <div class="card">
-        <img src="poster2.jpeg" alt="Material didático colorido">
-        <h3>Sem horários fixos</h3>
-        <p>Estude quando e onde melhor para a sua família. Não há compromissos rígidos. A proposta é leve, divertida e sem pressão.</p>
-      </div>
-    </section>
-
-    <section id="como">
-      <h2 class="section-title">Como funciona</h2>
-
-      <ol style="max-width: 800px; margin: 0 auto;">
-        <li>A pessoa responsável chama a ZAPSpeak pelo WhatsApp e informa a idade da criança.</li>
-        <li>Escolhe uma das modalidades: <strong>Grupo Misto</strong> ou <strong>VIP Exclusivo</strong>.</li>
-        <li>Entra no grupo correspondente e recebe o material de boas-vindas.</li>
-        <li>A criança e a mãe começam a participar das atividades pelo WhatsApp.</li>
-      </ol>
-
-      <div class="speakts">
-        <h3>Sistema Speakts (Grupo Misto)</h3>
-        <p>Os pontos Speakts recompensam a participação nas atividades. Meta indicada para o módulo: 1.110 SPKTS. O primeiro lugar do ranking recebe certificado físico com tubo e presente gratuitamente em casa.</p>
-        <table style="width: 100%; margin-top: 1rem; font-size: 0.9rem;">
-          <tr><td>Enviar áudio de feedback</td><td>10 SPKTS</td></tr>
-          <tr><td>Enviar foto do caderno</td><td>15 SPKTS</td></tr>
-          <tr><td>Concluir desafio</td><td>15 SPKTS</td></tr>
-          <tr><td>Bônus de pontualidade</td><td>5 SPKTS</td></tr>
-          <tr><td>Total semanal</td><td>45 SPKTS</td></tr>
-        </table>
-        <!-- Moeda girando já está acima via ::before animation -->
-      </div>
-    </section>
-
-    <section id="modalidades">
-      <h2 class="section-title">Modalidades</h2>
-
-      <div class="modalidades">
-
-        <div class="card" style="border: 2px solid var(--purple-main);">
+      <div class="grid-2">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-media" onclick="openLightbox('poster1.jpeg', 'Capa da Apostila Básico 1', 'Material didático ilustrado com carinho para inspirar o estudo leve e conjunto.')">
+            <img src="poster1.jpeg" alt="Aprender juntos é mais divertido">
+            <div class="card-media-overlay">
+              <span>📖 Material Exclusivo</span>
+              <span>🔍 Toque para ampliar</span>
+            </div>
+          </div>
           <div class="card-body">
-            <h3>Grupo Misto — R$ 50/mês</h3>
-            <ul>
-              <li>Participação em grupo de WhatsApp (até 10 crianças)</li>
-              <li>Sistema Speakts e ranking</li>
-              <li>Atividades de vocabulário, escuta e fala</li>
-              <li>Desafios para fazer em casa com a mãe</li>
-              <li>Certificado digital em PDF (gratuito)</li>
-              <li>Certificado físico personalizado: R$ 50 + frete</li>
-            </ul>
+            <h3>Aprender juntos fortalece o aprendizado</h3>
+            <p>A ZAPSpeak foi criada para que mães e filhos aprendam inglês juntos, respeitando a rotina da família. As atividades são enviadas pelo WhatsApp, unindo vocabulário prático, músicas, jogos e desafios interativos.</p>
           </div>
         </div>
 
-        <div class="card" style="border: 2px solid var(--green-soft);">
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="card-media" onclick="openLightbox('poster2.jpeg', 'Material Didático Colorido', 'Visual com personagens e elementos gráficos da apostila que tornam a leitura irresistível.')">
+            <img src="poster2.jpeg" alt="Material didático colorido ZAPSpeak">
+            <div class="card-media-overlay">
+              <span>🎨 Design Infantil & Acolhedor</span>
+              <span>🔍 Toque para ampliar</span>
+            </div>
+          </div>
           <div class="card-body">
-            <h3>VIP Exclusivo — R$ 200/mês</h3>
-            <ul>
-              <li>Atenção exclusiva (5 vagas apenas)</li>
-              <li>Privacidade total</li>
-              <li>Mesma proposta de aprendizagem</li>
-              <li>Certificado físico personalizado com tubo (incluído)</li>
-              <li>Frete grátis para todo o Brasil</li>
-              <li>Presente de conclusão de módulo</li>
-              <li>Irmão/irmã: +R$ 50 por criança</li>
-            </ul>
+            <h3>Sem horários rígidos e sem pressão</h3>
+            <p>Estude nos momentos que melhor se encaixam no dia a dia da sua casa. Sem deslocamentos, sem cobranças exaustivas: o foco é despertar a curiosidade genuína da criança pelo novo idioma.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE VAI PRATICAR -->
+  <section id="pratica" style="background: #FDFBFF;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Metodologia</span>
+        <h2 class="section-title">O que a criança vai praticar</h2>
+        <p class="section-subtitle">Pilares desenhados especialmente para desenvolver a fluência inicial com naturalidade.</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-body">
+            <div style="font-size: 2.2rem; margin-bottom: 0.6rem;">🗣️</div>
+            <h3>Vocabulário Real</h3>
+            <p>Palavras e frases do cotidiano, brinquedos, rotina e membros da família para usar imediatamente.</p>
           </div>
         </div>
 
+        <div class="card">
+          <div class="card-body">
+            <div style="font-size: 2.2rem; margin-bottom: 0.6rem;">🎵</div>
+            <h3>Músicas e Jogos</h3>
+            <p>Atividades dinâmicas e cantigas que fixam a pronúncia e tornam o aprendizado memorável.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div style="font-size: 2.2rem; margin-bottom: 0.6rem;">🎧</div>
+            <h3>Escuta e Fala</h3>
+            <p>Áudios amigáveis no WhatsApp incentivando a criança a soltar a voz sem medo de errar.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div style="font-size: 2.2rem; margin-bottom: 0.6rem;">🏡</div>
+            <h3>Desafios em Casa</h3>
+            <p>Missões práticas para fazer com a mãe, criando memórias afetivas em família.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como" class="steps-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Passo a Passo</span>
+        <h2 class="section-title">Como funciona a mentoria</h2>
+        <p class="section-subtitle">Simples e sem complicações. Você só precisa do WhatsApp instalado no celular.</p>
       </div>
 
-      <table class="comparativo">
-        <thead>
-          <tr>
-            <th>Característica</th>
-            <th>Grupo Misto</th>
-            <th>VIP Exclusivo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Mensalidade</td><td>R$ 50 por criança</td><td>R$ 200</td></tr>
-          <tr><td>Vagas/capacidade</td><td>Até 10 crianças por grupo</td><td>5 vagas</td></tr>
-          <tr><td>Formato</td><td>Grupo de WhatsApp</td><td>Atendimento exclusivo</td></tr>
-          <tr><td>Speakts e ranking</td><td>Sim</td><td>Não</td></tr>
-          <tr><td>Certificado digital PDF</td><td>Gratuito</td><td>Não especificado</td></tr>
-          <tr><td>Certificado físico com tubo</td><td>R$ 50 + frete</td><td>Incluído</td></tr>
-          <tr><td>Frete do certificado físico</td><td>Pelo responsável</td><td>Grátis em todo o Brasil</td></tr>
-          <tr><td>Presente de conclusão</td><td>Premiação 1º lugar ranking</td><td>Incluído para a criança</td></tr>
-          <tr><td>Inclusão de irmãos</td><td>Não especificado</td><td>+R$ 50 por irmão/irmã</td></tr>
-        </tbody>
-      </table>
-    </section>
+      <div class="grid-4">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Contato Inicial</h3>
+          <p>A mãe ou responsável envia uma mensagem no WhatsApp informando a idade da criança.</p>
+        </div>
 
-    <section id="o-que-vai-praticar">
-      <h2 class="section-title">O que a criança vai praticar</h2>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Escolha do Plano</h3>
+          <p>Você escolhe entre o <strong>Grupo Misto</strong> (dinâmico com ranking) ou <strong>VIP Exclusivo</strong>.</p>
+        </div>
 
-      <div class="card">
-        <h3>Vocabulário do dia a dia</h3>
-        <p>Palavras e expressões usadas no cotidiano, fundamentais para a comunicação real.</p>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Boas-Vindas</h3>
+          <p>Entrada no grupo ou canal exclusivo e recebimento do material didático oficial.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Prática Ativa</h3>
+          <p>Criança e mãe começam a cumprir as missões, áudios e desafios no próprio ritmo!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA DE MATERIAIS DIDÁTICOS -->
+  <section id="materiais" class="gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Material Ilustrado</span>
+        <h2 class="section-title">Galeria de Materiais da Apostila</h2>
+        <p class="section-subtitle">Toque em qualquer imagem para visualizar em alta resolução.</p>
       </div>
 
-      <div class="card">
-        <h3>Músicas e jogos</h3>
-        <p>Atividades lúdicas que tornam a prática mais divertida e memorável.</p>
+      <div class="gallery-grid">
+        <!-- Item 1 -->
+        <div class="gallery-item" onclick="openLightbox('poster1.jpeg', 'Apostila ZAPSpeak Básico 1', 'Capa oficial com personagens e apresentação visual alegre.')">
+          <span class="gallery-badge">Capa Oficial</span>
+          <div class="gallery-thumb-container">
+            <img src="poster1.jpeg" alt="Capa da Apostila Básico 1" loading="lazy">
+          </div>
+          <div class="gallery-caption">
+            <h4>Capa da Apostila</h4>
+            <span>Básico 1 • Início da Jornada</span>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="gallery-item" onclick="openLightbox('poster2.jpeg', 'Material Didático Colorido', 'Ilustrações envolventes que guiam cada aula temática.')">
+          <span class="gallery-badge">Conteúdo</span>
+          <div class="gallery-thumb-container">
+            <img src="poster2.jpeg" alt="Material Didático" loading="lazy">
+          </div>
+          <div class="gallery-caption">
+            <h4>Páginas Coloridas</h4>
+            <span>Ilustrações e Atividades</span>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="gallery-item" onclick="openLightbox('modoregra.jpeg', 'Regras do Módulo e Dinâmica', 'Como funciona a pontuação, entregas e a trilha de evolução do aluno.')">
+          <span class="gallery-badge">Metodologia</span>
+          <div class="gallery-thumb-container">
+            <img src="modoregra.jpeg" alt="Regras do Módulo ZAPSpeak" loading="lazy">
+          </div>
+          <div class="gallery-caption">
+            <h4>Regras do Módulo</h4>
+            <span>Estrutura e Dinâmica</span>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="gallery-item" onclick="openLightbox('postergeral.jpeg', 'Visão Geral do Curso', 'Apresentação das fases de estudo com suporte integral via WhatsApp.')">
+          <span class="gallery-badge">Visão Geral</span>
+          <div class="gallery-thumb-container">
+            <img src="postergeral.jpeg" alt="Visão Geral do Conteúdo" loading="lazy">
+          </div>
+          <div class="gallery-caption">
+            <h4>Painel Geral</h4>
+            <span>Trilha de Aprendizado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALIDADES E PREÇOS -->
+  <section id="modalidades">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Investimento</span>
+        <h2 class="section-title">Modalidades de Participação</h2>
+        <p class="section-subtitle">Escolha o formato que melhor atende às necessidades da sua família.</p>
       </div>
 
-      <div class="card">
-        <h3>Escuta e fala</h3>
-        <p>Prática de compreensão auditiva e produção oral no próprio ritmo.</p>
+      <div class="pricing-grid">
+        <!-- Grupo Misto -->
+        <div class="pricing-card misto">
+          <span class="pricing-tag tag-purple">Mais Procurado</span>
+          <div class="pricing-header">
+            <h3>Grupo Misto</h3>
+            <p style="color: #6a5d85; font-size: 0.95rem;">Comunidade com até 10 crianças e mães participando juntas.</p>
+            <div class="price-box">
+              <span class="price-currency">R$</span>
+              <span class="price-value">50</span>
+              <span class="price-period">/mês por criança</span>
+            </div>
+          </div>
+
+          <ul class="feature-list">
+            <li><span class="feature-icon">✓</span> Grupo exclusivo no WhatsApp (até 10 crianças)</li>
+            <li><span class="feature-icon">✓</span> Sistema Speakts de pontos com ranking por módulo</li>
+            <li><span class="feature-icon">✓</span> Atividades de vocabulário, escuta e fala</li>
+            <li><span class="feature-icon">✓</span> Desafios para fazer em casa com a mãe</li>
+            <li><span class="feature-icon">✓</span> Certificado digital oficial em PDF gratuito</li>
+            <li><span class="feature-icon">✓</span> <strong>1º do ranking:</strong> certificado físico no tubo + presente grátis</li>
+            <li><span class="feature-icon">✓</span> Certificado físico personalizado opcional: R$ 50 + frete</li>
+          </ul>
+
+          <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-primary" style="width: 100%;">
+            Quero o Grupo Misto
+          </a>
+        </div>
+
+        <!-- VIP Exclusivo -->
+        <div class="pricing-card vip">
+          <span class="pricing-tag tag-green">Apenas 5 Vagas</span>
+          <div class="pricing-header">
+            <h3>VIP Exclusivo</h3>
+            <p style="color: #6a5d85; font-size: 0.95rem;">Atenção 100% individual e total privacidade para a família.</p>
+            <div class="price-box">
+              <span class="price-currency">R$</span>
+              <span class="price-value">200</span>
+              <span class="price-period">/mês</span>
+            </div>
+          </div>
+
+          <ul class="feature-list">
+            <li><span class="feature-icon">★</span> Atendimento e acompanhamento exclusivo</li>
+            <li><span class="feature-icon">★</span> Máxima privacidade: sem exposição em grupos</li>
+            <li><span class="feature-icon">★</span> Certificado físico personalizado com tubo <strong>incluído</strong></li>
+            <li><span class="feature-icon">★</span> <strong>Frete grátis</strong> para todo o Brasil</li>
+            <li><span class="feature-icon">★</span> Presente especial de conclusão de módulo</li>
+            <li><span class="feature-icon">★</span> Inclusão de irmão/irmã por apenas +R$ 50/mês</li>
+            <li><span class="feature-icon">★</span> Todo o conteúdo e material didático completo</li>
+          </ul>
+
+          <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+            Garantir Vaga VIP
+          </a>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Desafios com a mãe</h3>
-        <p>Atividades para realizar em casa com a participação da mãe, fortalecendo o vínculo e o aprendizado.</p>
+      <!-- Tabela Comparativa -->
+      <div class="section-header" style="margin-bottom: 1.2rem;">
+        <h3 style="font-size: 1.7rem;">Comparativo Direto</h3>
       </div>
-    </section>
-
-    <section id="sistema-speakts">
-      <h2 class="section-title">Sistema Speakts</h2>
-
-      <div class="speakts">
-        <p>Apontação semanal:</p>
-        <ul>
-          <li>Enviar áudio de feedback: 10 SPKTS</li>
-          <li>Enviar foto do caderno (3 vezes): 15 SPKTS</li>
-          <li>Concluir desafio e enviar foto: 15 SPKTS</li>
-          <li>Bônus de pontualidade: 5 SPKTS</li>
-          <li><strong>Total semanal: 45 SPKTS</strong></li>
-        </ul>
-        <p>Na semana de recap (última semana do mês): total indicado de 50 SPKTS. Meta para o módulo: 1.110 SPKTS.</p>
-        <p>Os pontos podem ser trocados por aulas VIP, campanhas surpresa e brindes (canecas e cadernos personalizados).</p>
+      
+      <div class="table-wrapper">
+        <div class="mobile-scroll-hint">👈 Arraste para os lados para ver a tabela completa 👉</div>
+        <div class="table-container">
+          <table class="comparativo">
+            <thead>
+              <tr>
+                <th>Característica</th>
+                <th>Grupo Misto</th>
+                <th>VIP Exclusivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mensalidade</td>
+                <td><strong>R$ 50</strong> / criança</td>
+                <td><strong>R$ 200</strong></td>
+              </tr>
+              <tr>
+                <td>Vagas / Capacidade</td>
+                <td>Até 10 crianças por grupo</td>
+                <td>Apenas 5 vagas</td>
+              </tr>
+              <tr>
+                <td>Formato</td>
+                <td>Grupo interativo no WhatsApp</td>
+                <td>Atendimento individual e exclusivo</td>
+              </tr>
+              <tr>
+                <td>Sistema Speakts & Ranking</td>
+                <td>Sim (com premiações)</td>
+                <td>Não (foco individual)</td>
+              </tr>
+              <tr>
+                <td>Certificado Digital (PDF)</td>
+                <td>Gratuito pelo WhatsApp</td>
+                <td>Gratuito</td>
+              </tr>
+              <tr>
+                <td>Certificado Físico no Tubo</td>
+                <td>R$ 50 + frete (Grátis p/ 1º colocado)</td>
+                <td><strong>Incluído gratuitamente</strong></td>
+              </tr>
+              <tr>
+                <td>Frete do Certificado</td>
+                <td>Por conta do responsável</td>
+                <td><strong>Grátis para todo o Brasil</strong></td>
+              </tr>
+              <tr>
+                <td>Presente de Conclusão</td>
+                <td>Premiação para o 1º do ranking</td>
+                <td><strong>Garantido para a criança</strong></td>
+              </tr>
+              <tr>
+                <td>Inclusão de Irmãos</td>
+                <td>R$ 50 por criança</td>
+                <td>+R$ 50 por irmão/irmã</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="certificados">
-      <h2 class="section-title">Certificados</h2>
+  <!-- SISTEMA SPEAKTS -->
+  <section id="speakts" style="padding-top: 1rem;">
+    <div class="container">
+      <div class="speakts-box">
+        <div class="speakts-content">
+          <h3>🪙 Sistema Speakts de Pontuação</h3>
+          <p>No Grupo Misto, cada atividade concluída vale Speakts (SPKTS). Os pontos geram um ranking estimulante que recompensa o esforço e a dedicação da criança ao longo do módulo!</p>
 
-      <div class="card">
-        <h3>Certificado digital</h3>
-        <p>Gratuito para todos ao concluir o módulo. No Grupo Misto, enviado pelo WhatsApp em PDF. No VIP, não especificado nos materiais.</p>
+          <table class="speakts-table">
+            <tbody>
+              <tr>
+                <td>🎙️ Enviar áudio de feedback</td>
+                <td style="text-align: right;"><strong>10 SPKTS</strong></td>
+              </tr>
+              <tr>
+                <td>📝 Enviar foto do caderno (3 vezes na semana)</td>
+                <td style="text-align: right;"><strong>15 SPKTS</strong></td>
+              </tr>
+              <tr>
+                <td>🎯 Concluir desafio prático com foto</td>
+                <td style="text-align: right;"><strong>15 SPKTS</strong></td>
+              </tr>
+              <tr>
+                <td>⏰ Bônus especial de pontualidade</td>
+                <td style="text-align: right;"><strong>5 SPKTS</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Total Máximo Semanal</strong></td>
+                <td style="text-align: right;"><strong>45 SPKTS</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p style="font-size: 0.95rem;">
+            🌟 <strong>Meta do Módulo:</strong> 1.110 SPKTS. Na semana de recapitulação, a pontuação atinge 50 SPKTS. Os pontos também podem ser trocados por aulas VIP, campanhas surpresa e brindes personalizados (como canecas e cadernos)!
+          </p>
+        </div>
+
+        <div class="speakts-coin-wrapper" onclick="openLightbox('moeda.jpeg', 'Moeda Speakts', 'Moeda oficial do sistema de gamificação ZAPSpeak. Cada ponto acumulado aproxima o aluno de prêmios!')">
+          <img src="moeda.jpeg" alt="Moeda Speakts 3D" class="speakts-coin-img" title="Toque para ver a moeda em detalhes">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICADOS -->
+  <section id="certificados" style="background: #FAF8FC;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Conquistas</span>
+        <h2 class="section-title">Certificação de Conclusão</h2>
+        <p class="section-subtitle">Reconhecer o progresso da criança é fundamental para fortalecer sua autoestima e amor pelos estudos.</p>
       </div>
 
-      <div class="card">
-        <h3>Certificado físico personalizado com tubo</h3>
-        <p>No Grupo Misto: custa R$ 50 mais frete. No VIP: incluído (frete grátis para todo o Brasil).</p>
+      <div class="grid-2">
+        <div class="cert-card">
+          <h3>📜 Certificado Digital (PDF)</h3>
+          <p>Disponibilizado gratuitamente em alta resolução para todos os alunos concluintes do módulo, pronto para guardar e imprimir com orgulho em família.</p>
+        </div>
+
+        <div class="cert-card destaque">
+          <h3>🎓 Certificado Físico Personalizado</h3>
+          <p>Impresso em papel de alta gramatura, personalizado com o nome da criança e enviado em um elegante tubo de proteção para todo o país.</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <!-- CTA FINAL -->
+  <section id="contato">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Prontos para começar essa aventura?</h2>
+        <p>Converse diretamente conosco no WhatsApp. Tire suas dúvidas, informe a idade do seu filho e comece a aprender de um jeito muito mais gostoso!</p>
+        <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-whatsapp" style="font-size: 1.15rem; padding: 1rem 2.2rem;">
+          💬 Chamar no WhatsApp Agora
+        </a>
+      </div>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
   <footer>
-    <p>ZAPSpeak — Mentoria de inglês infantil<br>
-    Experiência leve, lúdica e flexível pelo WhatsApp</p>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>
+          <img src="cartaoquadradro.jpeg" alt="Logo" style="width: 32px; height: 32px; border-radius: 8px;">
+          ZAPSpeak
+        </h3>
+        <p>Mentoria de inglês infantil personalizada pelo WhatsApp. Uma experiência acolhedora onde pais e filhos aprendem juntos com leveza e diversão.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#sobre">Sobre a ZAPSpeak</a></li>
+          <li><a href="#como">Como Funciona</a></li>
+          <li><a href="#materiais">Materiais Didáticos</a></li>
+          <li><a href="#modalidades">Modalidades & Preços</a></li>
+          <li><a href="#speakts">Sistema Speakts</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Páginas & Contato</h4>
+        <ul>
+          <li><a href="https://wa.me/5511999999999" target="_blank">WhatsApp Oficial</a></li>
+          <li><a href="about.html">Página Sobre</a></li>
+          <li><a href="modalidades.html">Página Modalidades</a></li>
+          <li><a href="contato.html">Página Contato</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 ZAPSpeak — Todos os direitos reservados. Feito com carinho para famílias bilíngues.</p>
+    </div>
   </footer>
 
+  <!-- BARRA DE AÇÃO FIXA PARA CELULAR (STICKY BOTTOM BAR) -->
+  <div class="mobile-bottom-bar" aria-label="Ações rápidas">
+    <div class="mobile-bottom-container">
+      <a href="https://wa.me/5511999999999" target="_blank" class="mobile-bottom-btn mobile-btn-whatsapp">
+        💬 WhatsApp
+      </a>
+      <a href="#modalidades" class="mobile-bottom-btn mobile-btn-plans">
+        📋 Ver Planos
+      </a>
+    </div>
+  </div>
+
+  <!-- MODAL LIGHTBOX INTERATIVO PARA IMAGENS -->
+  <div class="lightbox-modal" id="lightbox" onclick="closeLightboxOnBackdrop(event)">
+    <div class="lightbox-dialog">
+      <button class="lightbox-close" onclick="closeLightbox()" title="Fechar visualização" aria-label="Fechar visualização">&times;</button>
+      <div class="lightbox-image-area">
+        <img id="lightbox-img" src="" alt="">
+      </div>
+      <div class="lightbox-details">
+        <h3 id="lightbox-title">Título da Imagem</h3>
+        <p id="lightbox-desc">Descrição do material didático.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Storytelling scroll: Progress bar de progresso
+    // Barra de progresso de leitura
     const progressBar = document.getElementById('progress-bar');
-    
-    function updateProgressBar() {
+    window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = Math.min(1, scrollTop / docHeight);
+      const progress = docHeight > 0 ? Math.min(1, scrollTop / docHeight) : 0;
       progressBar.style.width = `${progress * 100}%`;
-    }
-    
-    // Atualizar na rolagem com throttle
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateProgressBar();
-          ticking = false;
-        });
-        ticking = true;
-      }
     }, { passive: true });
-    
-    // Inicializar progresso
-    updateProgressBar();
 
-    // Reveal on scroll com Intersection Observer
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('revealed');
-          }, index * 100);
-        }
-      });
-    }, {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.15
+    // Menu Mobile Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('open');
     });
 
-    // Observar todas as sections
-    document.querySelectorAll('section').forEach((section, i) => {
-      revealObserver.observe(section);
-    });
-
-    // Hover effects aprimorados para cards
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        card.style.transform = 'translateY(-8px) scale(1.02)';
-        card.style.boxShadow = '0 12px 32px rgba(0,0,0,0.15)';
-      });
-      
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-        card.style.boxShadow = '';
-      });
-    });
-
-    // Smooth scroll para links internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          const startY = window.pageYOffset;
-          const endY = target.getBoundingClientRect().top + window.pageYOffset;
-          const distance = endY - startY;
-          const duration = 1000;
-          const startTime = performance.now();
-          
-          function animateScroll(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            const currentY = startY + (distance * easeOut);
-            
-            window.scrollTo(0, currentY);
-            
-            if (elapsed < duration) {
-              requestAnimationFrame(animateScroll);
-            }
-          }
-          
-          requestAnimationFrame(animateScroll);
-        }
-      });
-    });
-
-    // Typing effect para a chamada principal
-    const heroHeading = document.querySelector('.hero h2');
-    if (heroHeading) {
-      const originalText = heroHeading.textContent;
-      heroHeading.textContent = '';
-      let charIndex = 0;
-      
-      function typeHeroChar() {
-        if (charIndex < originalText.length) {
-          heroHeading.textContent += originalText.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeHeroChar, 50 + Math.random() * 30);
-        }
-      }
-      
-      const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setTimeout(typeHeroChar, 500);
-            heroObserver.unobserve(entry.target);
-          }
-        });
-      });
-      heroObserver.observe(document.querySelector('.hero'));
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('open');
     }
+
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+
+    // Funções do Lightbox
+    function openLightbox(src, title, desc) {
+      const modal = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const titleEl = document.getElementById('lightbox-title');
+      const descEl = document.getElementById('lightbox-desc');
+
+      img.src = src;
+      img.alt = title;
+      titleEl.textContent = title;
+      descEl.textContent = desc;
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOnBackdrop(e) {
+      if (e.target.id === 'lightbox') {
+        closeLightbox();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 </body>
 </html>
